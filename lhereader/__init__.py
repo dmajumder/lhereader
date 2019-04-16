@@ -2,7 +2,7 @@ import xml.etree.ElementTree as ET
 from ROOT import TLorentzVector
 from xml import sax
 class Particle:
-    def __init__(self, pdgid, spin, status, px = 0, py = 0, pz = 0, energy = 0, mass = 0, vtau = 0):
+    def __init__(self, pdgid, spin, status, px = 0, py = 0, pz = 0, energy = 0, mass = 0, vtau = 0, parent=-1):
         self.pdgid = pdgid
         self.px = px
         self.py = py
@@ -12,6 +12,7 @@ class Particle:
         self.spin = spin
         self.status = status
         self.vtau = vtau
+        self.parent = parent
 
     @property
     def p4(self):
@@ -125,6 +126,7 @@ class LHEReader():
             part_data = lines[i].strip().split()
             p = Particle(pdgid = int(part_data[0]),
                         status = int(part_data[1]),
+                        parent = int(part_data[2]),
                         px = float(part_data[6]),
                         py = float(part_data[7]),
                         pz = float(part_data[8]),
