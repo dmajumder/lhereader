@@ -17,7 +17,7 @@ if sys.version_info < (3,7):
 
 setup(
     name='lhereader',
-    version='1.0.1',
+    version='1.0.2',
     description='A python module to read LHE files.A Python module to read LHE files.',
     long_description=LONG_DESCRIPTION,
     long_description_content_type='text/markdown',
