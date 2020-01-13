@@ -1,8 +1,7 @@
 # lhereader
 [![PyPI version](https://badge.fury.io/py/lhereader.svg)](https://badge.fury.io/py/lhereader)
 
-A Python module to read LHE files. Originally by [diptaparna](https://github.com/diptaparna/lhereader), significantly rewritten by me.
-Requires python version > 3.6.
+A Python module to read LHE files. Originally by [diptaparna](https://github.com/diptaparna/lhereader), significantly rewritten by me. No dependency on ROOT, requires python version >= 3.6.
 
 Usage example:
 
