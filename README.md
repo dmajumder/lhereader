@@ -1,17 +1,31 @@
 # lhereader
-A Python module to read LHE (Les Houches Event) file and access the event information in an object oriented way.
-Requires ROOT (root.cern.ch) and pyroot as external dependencies.
+A Python module to read LHE files. Requires python version > 3.6.
 
-Sample code to use this module -
+Usage example:
 
-    from lhereader import readLHEF  
-    from ROOT import TCanvas, TH1F  
-    
-    data=readLHEF('unweighted_events.lhe')  
-    parts=data.getParticlesByIDs([5,-5]) # collect all botom and anti-bottom quarks  
-    c=TCanvas()  
-    hist=TH1F("pt", "Pt of b/#bar{b}",100,0,1000)  
-    for p in parts:  
-      hist.Fill(p.pt)  
-    hist.Draw()  
-    c.SaveAs("pt_b_bbar.png")  
+```python
+import numpy as np
+from lhereader import LHEReader
+
+
+reader = LHEReader('path/to/file.lhe')
+
+# Mediator mass in each event
+mmed = []
+counter = 0
+for iev, event in enumerate(reader):
+    # Find DM particles
+    dm = filter(lambda x: abs(x.pdgid)== 52, event.particles)
+
+    # Sum over all DM four-momenta in the event
+    combined_p4 = None
+    for p4 in map(lambda x: x.p4(), dm):
+        if combined_p4:
+            combined_p4 += p4
+        else:
+            combined_p4 = p4
+    mmed.append(combined_p4.mass)
+
+print(f'Mean mediator mass: {np.mean(mmed)}')
+print(f'Median mediator mass: {np.median(mmed)}')
+```
