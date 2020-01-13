@@ -1,5 +1,6 @@
 # lhereader
-A Python module to read LHE files. Requires python version > 3.6.
+A Python module to read LHE files. Originally by [diptaparna](https://github.com/diptaparna/lhereader), significantly rewritten by me.
+Requires python version > 3.6.
 
 Usage example:
 
