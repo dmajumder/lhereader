@@ -1,9 +1,8 @@
-import xml.etree.ElementTree as ET
+from xml.etree import ElementTree
 from xml import sax
 from skhep.math import LorentzVector
 import sys
-if sys.version_info < (3,7):
-    from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 @dataclass
 class Particle:
@@ -24,9 +23,9 @@ class Particle:
 
 @dataclass
 class Event:
-    particles: list
-    weights: list
-    scale: float
+    particles: list = field(default_factory=list)
+    weights: list = field(default_factory=list)
+    scale: float = -1
 
     def add_particle(self, particle):
         self.particles.append(particle)
@@ -78,17 +77,17 @@ class LHEReader():
             self.current[1].clear()
 
         # Find next event in XML
-        element = self.iterator.next()
+        element = next(self.iterator)
         while element[1].tag != "event":
-            element = self.iterator.next()
+            element = next(self.iterator)
         self.current = element
 
         # Weight information comes after
         # the actual event
-        element = self.iterator.next()
+        element = next(self.iterator)
         self.current_weights = []
         while element[1].tag == "wgt":
             self.current_weights.append(float(element[1].text))
-            element = self.iterator.next()
+            element = next(self.iterator)
         return self.unpack_from_iterator()
 
