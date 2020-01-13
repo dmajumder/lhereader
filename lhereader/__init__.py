@@ -1,8 +1,8 @@
-from xml.etree import ElementTree
-from xml import sax
-from skhep.math import LorentzVector
-import sys
 from dataclasses import dataclass, field
+from xml.etree import ElementTree
+
+from skhep.math import LorentzVector
+
 
 @dataclass
 class Particle:
@@ -90,4 +90,3 @@ class LHEReader():
             self.current_weights.append(float(element[1].text))
             element = next(self.iterator)
         return self.unpack_from_iterator()
-
