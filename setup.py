@@ -17,10 +17,10 @@ if sys.version_info < (3,7):
 
 setup(
     name='lhereader',
-    version='1.0',
-    description='',
+    version='1.0.0',
+    description='A python module to read LHE files.A Python module to read LHE files.',
     long_description=LONG_DESCRIPTION,
-    long_description_content_type='',
+    long_description_content_type='text/markdown',
     url='https://github.com/AndreasAlbert/lhereader',
     author='Andreas Albert',
     author_email='andreas.albert@cern.ch',
