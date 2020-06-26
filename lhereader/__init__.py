@@ -56,7 +56,7 @@ class LHEReader():
             part_data = lines[ipart].strip().split()
             p = Particle(pdgid = int(part_data[0]),
                         status = int(part_data[1]),
-                        parent = int(part_data[2]),
+                        parent = int(part_data[2])-1,
                         px = float(part_data[6]),
                         py = float(part_data[7]),
                         pz = float(part_data[8]),
